@@ -17,7 +17,16 @@ function setup() {
 }
 
 function draw() {
+  let xpos = width - 400;
+  let ypos = height - 200;
+
   background(255);
   imageMode(CENTER);
-  image(thanos, 100, height - 100, 200, 200);
+  image(thanos, xpos, ypos, 400, 400);
+
+  if (keyIsPressed) {
+    if (key === " ") {
+      
+    }
+  }
 }

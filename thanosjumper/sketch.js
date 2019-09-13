@@ -6,8 +6,6 @@
 // - describe what you did to take this project "above and beyond"
 
 let thanos;
-let imgWidth = 50;
-let imgHeight = 50;
 
 function preload() {
   thanos = loadImage("assets/robloxthanos.png");
@@ -21,16 +19,5 @@ function setup() {
 function draw() {
   background(255);
   imageMode(CENTER);
-  image(thanos, mouseX, mouseY, imgWidth, imgHeight);
-
-  if (keyIsPressed) {
-    if (keyCode === UP_ARROW) {
-      imgHeight += 5;
-      imgWidth += 5;
-    }
-    else if (keyCode === DOWN_ARROW) {
-      imgWidth -= 5;
-      imgHeight -= 5;
-    }
-  }
+  image(thanos, 100, height - 100, 200, 200);
 }

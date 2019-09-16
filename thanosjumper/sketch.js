@@ -6,6 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 let thanos;
+let xpos;
 
 function preload() {
   thanos = loadImage("assets/robloxthanos.png");
@@ -24,9 +25,9 @@ function draw() {
   imageMode(CENTER);
   image(thanos, xpos, ypos, 400, 400);
 
-  if (keyIsPressed) {
-    if (key === " ") {
+  // if (keyIsPressed) {
+  //   if (key === " ") {
       
-    }
-  }
+  //   }
+  // }
 }

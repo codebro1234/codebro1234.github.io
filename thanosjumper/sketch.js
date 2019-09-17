@@ -7,6 +7,8 @@
 
 let thanos;
 let xpos;
+let ypos;
+let groundlvl;
 
 function preload() {
   thanos = loadImage("assets/robloxthanos.png");
@@ -18,16 +20,36 @@ function setup() {
 }
 
 function draw() {
-  let xpos = width - 400;
-  let ypos = height - 200;
+  xpos = width - 400;
+  ypos = height - 200;
 
   background(255);
   imageMode(CENTER);
   image(thanos, xpos, ypos, 400, 400);
 
-  // if (keyIsPressed) {
-  //   if (key === " ") {
-      
-  //   }
-  // }
+  if (keyIsPressed) {
+    if (key === " ") {
+      jump();
+    }
+  }
+}
+
+
+function jump() {
+  let dy = -200;
+  groundlvl = ypos;
+  ypos -= 10;
+  
+  background(255);
+  image(thanos, xpos, ypos, 400, 400);
+
+  while (ypos < groundlvl) {
+    ypos -= dy; 
+    dy += 10;
+
+    background(255);
+    image(thanos, xpos, ypos, 400, 400);
+  }
+
+  ypos = groundlvl;
 }

@@ -5,25 +5,29 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let thanos;
+let object;
+let groundlvl;
 let xpos;
 let ypos;
-let groundlvl;
-
-function preload() {
-  thanos = loadImage("assets/robloxthanos.png");
-}
+let sidelength = 100;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
+  line(0, groundlvl, width, groundlvl);
 }
 
 function draw() {
-  xpos = width - 350;
-  ypos = height - 200;
+  groundlvl = windowHeight - 150;
+  ypos = groundlvl - sidelength;
+  xpos = 200
+  object = square(xpos, ypos, sidelength);
 
-  background(255);
-  imageMode(CENTER);
-  image(thanos, xpos, ypos, 400, 400);
+  if (keyIsPressed) {
+    if (key === " ") {
+      ypos += 100
+      updateImage();
+    }
+  }
 }
+

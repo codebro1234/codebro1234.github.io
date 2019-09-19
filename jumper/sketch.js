@@ -26,7 +26,7 @@ function draw() {
   if (keyIsPressed) {
     if (key === " ") {
       ypos += 100
-      updateImage();
+      
     }
   }
 }

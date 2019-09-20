@@ -5,29 +5,18 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let object;
-let groundlvl;
-let xpos;
-let ypos;
-let sidelength = 100;
-
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(255);
-  line(0, groundlvl, width, groundlvl);
+  createCanvas(500, 400);
+  background(220);
 }
 
 function draw() {
-  groundlvl = windowHeight - 150;
-  ypos = groundlvl - sidelength;
-  xpos = 200
-  object = square(xpos, ypos, sidelength);
+  intro();
+}
 
-  if (keyIsPressed) {
-    if (key === " ") {
-      ypos += 100
-      
-    }
-  }
+function intro() {
+  fill(201, 240, 233);
+  strokeWeight(3);
+  rect(0, 3 * (height/4) - 10, width - 10, height/4, 10);
 }
 

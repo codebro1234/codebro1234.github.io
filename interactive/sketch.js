@@ -5,9 +5,16 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let bg;
+let textting = "Nabeel biggest gae adkjsahdkjsahd jajshd akdh askjdhkjsa hdkjsa hdkjsa hdkjsadjsahd";
+
+function preload() {
+  bg = loadImage("assets/introbackground.PNG");
+}
+
 function setup() {
-  createCanvas(500, 400);
-  background(220);
+  createCanvas(700, 500);
+  background(0);
 }
 
 function draw() {
@@ -15,8 +22,15 @@ function draw() {
 }
 
 function intro() {
-  fill(201, 240, 233);
-  strokeWeight(3);
-  rect(5, 3 * (height/4) - 10, width - 10, height/4, 10);
+  background(bg);
+  updateText(textting);
+}
+
+function updateText(boi) {
+  fill(255);
+  rect(5, 3 * (height/4) - 5, width - 10, height/4, 20);
+  fill(0);
+  textSize(20);
+  text(boi, 30, 3 * (height/4) + 20, width - 30, height/4);
 }
 

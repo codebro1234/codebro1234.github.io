@@ -17,6 +17,6 @@ function draw() {
 function intro() {
   fill(201, 240, 233);
   strokeWeight(3);
-  rect(0, 3 * (height/4) - 10, width - 10, height/4, 10);
+  rect(5, 3 * (height/4) - 10, width - 10, height/4, 10);
 }
 

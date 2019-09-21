@@ -6,11 +6,12 @@
 // - describe what you did to take this project "above and beyond"
 
 let bg;
+let prof;
 let textting = "Welcome to the monde de Pokebro!!!"
 
 function preload() {
   bg = loadImage("assets/introbackground.PNG");
-  prof = loadImage
+  prof = loadImage("assets/prof1.PNG");
 }
 
 function setup() {
@@ -25,6 +26,7 @@ function draw() {
 
 function intro() {
   background(bg);
+  image(prof, width/3, height/8, width/3, 5 * (height/8));
   textBox(textting); 
 }
 

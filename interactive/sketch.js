@@ -6,31 +6,39 @@
 // - describe what you did to take this project "above and beyond"
 
 let bg;
-let textting = "Nabeel biggest gae adkjsahdkjsahd jajshd akdh askjdhkjsa hdkjsa hdkjsa hdkjsadjsahd";
+let textting = "Welcome to the monde de Pokebro!!!"
 
 function preload() {
   bg = loadImage("assets/introbackground.PNG");
+  prof = loadImage
 }
 
 function setup() {
-  createCanvas(700, 500);
+  createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   background(0);
+  noLoop();
 }
 
 function draw() {
-  intro();
+  intro();  
 }
 
 function intro() {
   background(bg);
-  updateText(textting);
+  textBox(textting); 
 }
 
-function updateText(boi) {
+function textBox(theText) {
+  let newText = "";
+
   fill(255);
-  rect(5, 3 * (height/4) - 5, width - 10, height/4, 20);
+  rect(width * 0.01, 3 * (height/4) - height * 0.01, width - width * 0.02, height/4, 20);
   fill(0);
   textSize(20);
-  text(boi, 30, 3 * (height/4) + 20, width - 30, height/4);
+
+  for (let i = 0; i < theText.length; i++) {
+    newText += theText[i];
+    text(newText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4);
+  }
 }
 

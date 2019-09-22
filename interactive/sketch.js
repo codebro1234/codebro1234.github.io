@@ -5,13 +5,21 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let bg;
-let prof;
-let textting = "Welcome to the monde de Pokebro!!!"
+//backgrounds
+let introBg;
+
+//characters
+let prof1;
+let prof2;
+let prof3;
+let prof4;
+
+//dialog
+let textting = "Hello boss, this is random text."
 
 function preload() {
-  bg = loadImage("assets/introbackground.PNG");
-  prof = loadImage("assets/prof1.PNG");
+  IntroBg = loadImage("assets/introbackground.PNG");
+  prof = loadImage("assets/professor1.PNG");
 }
 
 function setup() {
@@ -25,8 +33,9 @@ function draw() {
 }
 
 function intro() {
-  background(bg);
-  image(prof, width/3, height/8, width/3, 5 * (height/8));
+  background(IntroBg);
+  image(prof, width/3, height/6, width/4, 5 * (height/8))
+  //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
   textBox(textting); 
 }
 
@@ -40,7 +49,13 @@ function textBox(theText) {
 
   for (let i = 0; i < theText.length; i++) {
     newText += theText[i];
-    text(newText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4);
+    setTimeout(text(newText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4), 500);
   }
 }
 
+function fadeImageIn(theImage, x, y, xl, yl) {
+  for (let i = 0; i < 255; i += 5) {
+    tint(255, 255, 255, [i]);
+    setTimeout(image(theImage, x, y, xl, yl), 1000);
+  }
+}

@@ -16,6 +16,11 @@ let prof4;
 
 //dialog
 let textting = "Hello boss, this is random text."
+let moreText = "yo this is more text";
+
+//buttons
+let aPressed = false;
+let bPressed = false;
 
 function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
@@ -29,14 +34,25 @@ function setup() {
 }
 
 function draw() {
-  intro();  
+  gameIntro();  
 }
 
-function intro() {
+function keyTyped() {
+  if (key === "a") {
+    aPressed = true;
+  }
+  else if (key === "b") {
+    bPressed = false;
+  }
+}
+
+function gameIntro() {
   background(IntroBg);
   image(prof, width/3, height/6, width/4, 5 * (height/8))
   //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
   textBox(textting); 
+  //waitForAPress();
+  textBox(moreText);
 }
 
 function textBox(theText) {
@@ -58,4 +74,18 @@ function fadeImageIn(theImage, x, y, xl, yl) {
     tint(255, 255, 255, [i]);
     setTimeout(image(theImage, x, y, xl, yl), 1000);
   }
+}
+
+function waitForAPress() {
+  while (!aPressed) {
+    console.log("1");
+  }
+  aPressed = false;
+}
+
+function waitForBPress() {
+  while (!bPressed) {
+    console.log("1");
+  }
+  bPressed = false;
 }

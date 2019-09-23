@@ -24,68 +24,70 @@ let bPressed = false;
 
 function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
-  prof = loadImage("assets/professor1.PNG");
+  prof = loadImage("assets/professor3.PNG");
 }
 
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   background(0);
-  noLoop();
+  //noLoop();
 }
 
 function draw() {
   gameIntro();  
 }
 
-function keyTyped() {
-  if (key === "a") {
-    aPressed = true;
-  }
-  else if (key === "b") {
-    bPressed = false;
-  }
-}
 
 function gameIntro() {
   background(IntroBg);
   image(prof, width/3, height/6, width/4, 5 * (height/8))
   //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
   textBox(textting); 
-  //waitForAPress();
+  waitForAPress();
   textBox(moreText);
 }
 
 function textBox(theText) {
-  let newText = "";
-
   fill(255);
   rect(width * 0.01, 3 * (height/4) - height * 0.01, width - width * 0.02, height/4, 20);
+  
   fill(0);
   textSize(20);
-
-  for (let i = 0; i < theText.length; i++) {
-    newText += theText[i];
-    setTimeout(text(newText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4), 500);
-  }
+  text(theText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4)
 }
 
 function fadeImageIn(theImage, x, y, xl, yl) {
   for (let i = 0; i < 255; i += 5) {
     tint(255, 255, 255, [i]);
-    setTimeout(image(theImage, x, y, xl, yl), 1000);
+    image(theImage, x, y, xl, yl);
   }
 }
 
 function waitForAPress() {
   while (!aPressed) {
-    console.log("1");
+    if (keyIsPressed) {
+      if (key === " ") {
+        aPressed = true;
+      }
+    }
+
+    console.log("jhgfj");
   }
   aPressed = false;
 }
 
 function waitForBPress() {
   while (!bPressed) {
-    console.log("1");
+    console.log("ujhyg");
   }
   bPressed = false;
+}
+
+function keyTyped() {
+  if (key === " ") {
+    aPressed = true;
+  }
+  else if (key === "b") {
+    bPressed = false;
+  }
 }

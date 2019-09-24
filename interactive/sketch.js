@@ -5,6 +5,13 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+//states
+let state = 0;
+/*
+  0 = intro;
+  more to be added later
+*/
+
 //backgrounds
 let introBg;
 
@@ -35,19 +42,26 @@ function setup() {
 }
 
 function draw() {
-  gameIntro();  
+  if (state === 0) {
+    gameIntro();
+  } 
   //startGame();
 }
 
 
 function gameIntro() {
-  let textNum = 4;
+  let textNum = 0;
 
   background(IntroBg);
   image(prof[textNum], width/3, height/6, width/4, 5 * (height/8))
   //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
 
   textBox(IntroDialog[textNum]); 
+
+  if (aPressed) {
+    textNum++;
+    aPressed = false;
+  }
 }
 
 function textBox(theText) {
@@ -63,5 +77,11 @@ function fadeImageIn(theImage, x, y, xl, yl) {
   for (let i = 0; i < 255; i += 5) {
     tint(255, 255, 255, [i]);
     image(theImage, x, y, xl, yl);
+  }
+}
+
+function keyPressed() {
+  if (key ===" ") {
+    aPressed = true;
   }
 }

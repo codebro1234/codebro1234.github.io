@@ -20,11 +20,15 @@ let introTextNum = 0;
 let introBg;
 
 //characters
-let playerName;
+let playerName;  //going to make class for players as game development progresses
+
+//sprites
 let prof;
+let maleCharacterSprite;
+let femaleCharacterSprite
 
 //dialog
-let IntroDialog = ["Welcome to the monde de Pokebro!!!", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "Ah yes, hello " + playerName + "!", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
+let IntroDialog = ["Welcome to the monde de Pokebro!!!", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "Random dogma", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
 
 //buttons
 let aPressed = false;
@@ -48,6 +52,7 @@ function draw() {
   else if (state === 1) {
     background(0);
   }
+  
 }
 
 function gameIntro() {
@@ -55,12 +60,13 @@ function gameIntro() {
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8))
   //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
 
-  textBox(IntroDialog[introTextNum]); 
+  textBox(IntroDialog[introTextNum]);
 
   if (introTextNum === 6) {
     state = 1;
   }
   else if (introTextNum === 2) {
+    noLoop();
     pickName();
   }
   // else if (introTextNum === 4) {
@@ -74,11 +80,11 @@ function gameIntro() {
 }
 
 function pickSprite() {
-  console.log("it work");
+  console.log("it working");
 }
 
 function pickName() {
-  inputBox = createInput();
+  inputBox = createInput('');
   inputBox.position(50, 300);
 
   inputButton = createButton('Submit');
@@ -92,6 +98,7 @@ function pickName() {
 }
 
 function setPlayerName() {
+  console.log(inputBox.value());
   playerName = inputBox.value();
 
   inputBox.remove();
@@ -99,6 +106,7 @@ function setPlayerName() {
   greeting.remove();
   
   introTextNum++;
+  loop();
 }
 
 function textBox(theText) {

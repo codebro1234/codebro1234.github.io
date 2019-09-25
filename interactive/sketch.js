@@ -19,6 +19,9 @@ let introTextNum = 0;
 //backgrounds
 let introBg;
 
+//background music/sound effects
+let introMusic;
+
 //characters
 let playerName;  //going to make class for players as game development progresses
 
@@ -38,11 +41,13 @@ let inputButton;
 function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
   prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")];
+  introMusic = loadSound("assets/introMusic.mp3");
 }
 
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   background(0);
+  introMusic.play();
 }
 
 function draw() {
@@ -60,7 +65,12 @@ function gameIntro() {
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8))
   //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
 
-  textBox(IntroDialog[introTextNum]);
+  if (introTextNum === 3) {
+    textBox("Ah, yes, hello " + playerName + "!");
+  }
+  else {
+    textBox(IntroDialog[introTextNum]);
+  }
 
   if (introTextNum === 6) {
     state = 1;

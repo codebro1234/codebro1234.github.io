@@ -50,7 +50,6 @@ function draw() {
   }
 }
 
-
 function gameIntro() {
   background(IntroBg);
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8))
@@ -61,12 +60,12 @@ function gameIntro() {
   if (introTextNum === 6) {
     state = 1;
   }
-  // else if (introTextNum === 2) {
-  //   pickName();
-  // }
-  else if (introTextNum === 4) {
-    pickSprite();
+  else if (introTextNum === 2) {
+    pickName();
   }
+  // else if (introTextNum === 4) {
+  //   pickSprite();
+  // }
 
   if (aPressed) {
     introTextNum++;
@@ -74,16 +73,20 @@ function gameIntro() {
   }
 }
 
+function pickSprite() {
+  console.log("it work");
+}
+
 function pickName() {
   inputBox = createInput();
-  inputBox.position(20, 300);
+  inputBox.position(50, 300);
 
   inputButton = createButton('Submit');
   inputButton.position(inputBox.x + inputBox.width, 300);
   inputButton.mousePressed(setPlayerName);
 
   greeting = createElement('h2', 'What is your name?');
-  greeting.position(20, 245);
+  greeting.position(50, 245);
 
   textSize(50);
 }

@@ -4,7 +4,7 @@
 //
 // Extra for Experts:
 // - background music
-// - "created"/photoshopped my own sprites (though not every sprite)
+// - "created"/photoshopped my own sprites (except the main character sprites)
 
 //input box for name
 let inputBox;
@@ -41,10 +41,10 @@ let inputButton;
 
 function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
-  prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")];
-  introMusic = loadSound("assets/introMusic.mp3");
+  prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")]; //professor sprite from https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
+  introMusic = loadSound("assets/introMusic.mp3"); //music from youtube (https://www.youtube.com/watch?v=1RRGInmOhTQ)
   maleCharacterSprite = loadImage("assets/maleTestSprite.png");
-  femaleCharacterSprite = loadImage("assets/femaleTestSprite.png");
+  femaleCharacterSprite = loadImage("assets/femaleTestSprite.png"); //both male and female sprites from https://www.pngtube.com/viewm/TbRJb_female-and-male-stick-figure/
 }
 
 function setup() {
@@ -65,6 +65,10 @@ function draw() {
 
 //intro scene for final project
 function gameIntro() {
+  //loads background image and professor sprite
+  background(IntroBg);
+  image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8));
+  
   //checks for specific states of the intro that have other functions to go through
   if (introTextNum === 6) {
     state = 1;
@@ -77,10 +81,6 @@ function gameIntro() {
   else if (introTextNum === 4) {
     pickSprite();
   }
-
-  //loads background image and professor sprite
-  background(IntroBg);
-  image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8));
 
   //loads textbox with dialog based of intro state, needed specific one for 3 as it complicated the variable assignment when in array
   if (introTextNum === 3) {
@@ -98,6 +98,7 @@ function gameIntro() {
 }
 
 function pickSprite() {
+  console.log("yes");
   //I will add actual sprites for these, did not find the time for this assignment
   image(maleCharacterSprite, width/6, height/8, width/6, height/2);
   image(femaleCharacterSprite, 7 * (width/12), height/8, width/6, height/2);
@@ -126,14 +127,14 @@ function pickSprite() {
 //created input box for player name
 function pickName() {
   inputBox = createInput('');
-  inputBox.position(50, 300);
+  inputBox.position(width/2 + (inputBox.width * 0.8), 2 * (height/3));
 
   inputButton = createButton('Submit');
-  inputButton.position(inputBox.x + inputBox.width, 300);
+  inputButton.position(inputBox.x + inputBox.width, 2 * (height/3));
   inputButton.mousePressed(setPlayerName);
 
   greeting = createElement('h2', 'What is your name?');
-  greeting.position(50, 245);
+  greeting.position(width/2 + (inputBox.width * 0.8), 2 * (height/3) - 50);
 
   textSize(50);
 }

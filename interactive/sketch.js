@@ -3,9 +3,10 @@
 // 25/09/19
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - background music
+// - "created"/photoshopped my own sprites (though not every sprite)
 
-//input box
+//input box for name
 let inputBox;
 
 //states
@@ -31,7 +32,7 @@ let maleCharacterSprite;
 let femaleCharacterSprite
 
 //dialog
-let IntroDialog = ["Welcome to the monde de Pokebro!!!", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "Random dogma", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
+let IntroDialog = ["Welcome to the monde de Pokebro!!! Press spacebar to continue.", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "placeholder", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
 
 //buttons
 let aPressed = false;
@@ -42,6 +43,8 @@ function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
   prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")];
   introMusic = loadSound("assets/introMusic.mp3");
+  maleCharacterSprite = loadImage("assets/maleTestSprite.png");
+  femaleCharacterSprite = loadImage("assets/femaleTestSprite.png");
 }
 
 function setup() {
@@ -50,6 +53,7 @@ function setup() {
   introMusic.play();
 }
 
+//loops through specific parts of the game using state variables, more will be added
 function draw() {
   if (state === 0) {
     gameIntro();
@@ -57,14 +61,28 @@ function draw() {
   else if (state === 1) {
     background(0);
   }
-  
 }
 
+//intro scene for final project
 function gameIntro() {
+  //checks for specific states of the intro that have other functions to go through
+  if (introTextNum === 6) {
+    state = 1;
+    introMusic.stop();
+  }
+  else if (introTextNum === 2) {
+    noLoop(); //loop ended to allow user to input name
+    pickName();
+  }
+  else if (introTextNum === 4) {
+    pickSprite();
+  }
+
+  //loads background image and professor sprite
   background(IntroBg);
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8))
-  //fadeImageIn(prof, width/3, height/6, width/4, 5 * (height/8));
 
+  //loads textbox with dialog based of intro state, needed specific one for 3 as it complicated the variable assignment when in array
   if (introTextNum === 3) {
     textBox("Ah, yes, hello " + playerName + "!");
   }
@@ -72,17 +90,7 @@ function gameIntro() {
     textBox(IntroDialog[introTextNum]);
   }
 
-  if (introTextNum === 6) {
-    state = 1;
-  }
-  else if (introTextNum === 2) {
-    noLoop();
-    pickName();
-  }
-  // else if (introTextNum === 4) {
-  //   pickSprite();
-  // }
-
+  //advances game when space bar is pressed
   if (aPressed) {
     introTextNum++;
     aPressed = false;
@@ -90,9 +98,32 @@ function gameIntro() {
 }
 
 function pickSprite() {
-  console.log("it working");
+  //I will add actual sprites for these, did not find the time for this assignment
+  image(maleCharacterSprite, width/6, height/8, width/6, height/2);
+  image(femaleCharacterSprite, 7 * (width/12), height/8, width/6, height/2);
+
+  //checks if mouse hovering over sprite
+  if (mouseX <= width/6 + width/6 && mouseX >= width/6 && mouseY >= height/8 && mouseY <= height/8 + height/2) {
+    if (mouseIsPressed) {
+      introTextNum++;
+      //once I make an actual sprite and class for characters I will set the specific sprite for the character here
+    }
+    else {
+      image(maleCharacterSprite, width/6, height/8, width/6 * 1.1, height/2 * 1.1);
+    }
+  }
+  else if (mouseX <= 7 * (width/12) + width/6 && mouseX >= 7 * (width/12) && mouseY >= height/8 && mouseY <= height/8 + height/2) {
+    if (mouseIsPressed) {
+      introTextNum++;
+      //once I make an actual sprite and class for characters I will set the specific sprite for the character here
+    }
+    else {
+      image(femaleCharacterSprite, 7 * (width/12), height/8, width/6 * 1.1, height/2 * 1.1);
+    }
+  }
 }
 
+//created input box for player name
 function pickName() {
   inputBox = createInput('');
   inputBox.position(50, 300);
@@ -107,8 +138,8 @@ function pickName() {
   textSize(50);
 }
 
+//removes input stuff, eventually the input value will be assigned for the main character in a character class
 function setPlayerName() {
-  console.log(inputBox.value());
   playerName = inputBox.value();
 
   inputBox.remove();
@@ -116,9 +147,10 @@ function setPlayerName() {
   greeting.remove();
   
   introTextNum++;
-  loop();
+  loop(); //loop restarted to continue game
 }
 
+//a function that takes in the text that will be displayed and shows it at the bottom like an authentic pokemon game
 function textBox(theText) {
   fill(255);
   rect(width * 0.01, 3 * (height/4) - height * 0.01, width - width * 0.02, height/4, 20);
@@ -128,13 +160,7 @@ function textBox(theText) {
   text(theText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4)
 }
 
-function fadeImageIn(theImage, x, y, xl, yl) {
-  for (let i = 0; i < 255; i += 5) {
-    tint(255, 255, 255, [i]);
-    image(theImage, x, y, xl, yl);
-  }
-}
-
+//checks if specific keys are pressed, more will be added
 function keyPressed() {
   if (key ===" ") {
     aPressed = true;

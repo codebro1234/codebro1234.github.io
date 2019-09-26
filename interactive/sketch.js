@@ -29,7 +29,7 @@ let playerName;  //going to make class for players as game development progresse
 //sprites
 let prof;
 let maleCharacterSprite;
-let femaleCharacterSprite
+let femaleCharacterSprite;
 
 //dialog
 let IntroDialog = ["Welcome to the monde de Pokebro!!! Press spacebar to continue.", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "placeholder", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
@@ -80,7 +80,7 @@ function gameIntro() {
 
   //loads background image and professor sprite
   background(IntroBg);
-  image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8))
+  image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8));
 
   //loads textbox with dialog based of intro state, needed specific one for 3 as it complicated the variable assignment when in array
   if (introTextNum === 3) {

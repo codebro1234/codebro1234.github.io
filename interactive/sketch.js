@@ -98,7 +98,6 @@ function gameIntro() {
 }
 
 function pickSprite() {
-  console.log("yes");
   //I will add actual sprites for these, did not find the time for this assignment
   image(maleCharacterSprite, width/6, height/8, width/6, height/2);
   image(femaleCharacterSprite, 7 * (width/12), height/8, width/6, height/2);

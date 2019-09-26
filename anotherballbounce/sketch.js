@@ -10,7 +10,7 @@ let y;
 let radius = 100;
 let dx = 10;
 let dy = 10;
-let mode = 1;
+let mode = 2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

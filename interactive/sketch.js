@@ -41,7 +41,7 @@ let inputButton;
 
 function preload() {
   IntroBg = loadImage("assets/introbackground.PNG");
-  prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")]; //professor sprite from https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
+  prof = [loadImage("assets/professor1.png"), loadImage("assets/professor1.png"), loadImage("assets/professor2.png"), loadImage("assets/professor1.png"), loadImage("assets/professor3.png"), loadImage("assets/professor4.png")]; //professor sprite from https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
   introMusic = loadSound("assets/introMusic.mp3"); //music from youtube (https://www.youtube.com/watch?v=1RRGInmOhTQ)
   maleCharacterSprite = loadImage("assets/maleTestSprite.png");
   femaleCharacterSprite = loadImage("assets/femaleTestSprite.png"); //both male and female sprites from https://www.pngtube.com/viewm/TbRJb_female-and-male-stick-figure/

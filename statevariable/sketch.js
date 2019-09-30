@@ -1,5 +1,5 @@
-// Line Art Demo
-// Abar
+// State Variable
+// Abrar Zaher
 // Date
 //
 // Extra for Experts:
@@ -11,5 +11,5 @@ function setup() {
 }
 
 function draw() {
-  line(mouseX, mouseY, pmouseX, pmouseY);
+ rect(5 * (width/6), height * 0.05) 
 }

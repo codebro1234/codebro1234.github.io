@@ -6,10 +6,10 @@
 // - describe what you did to take this project "above and beyond"
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(255);
+  createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
+  background(220);
 }
 
 function draw() {
- rect(5 * (width/6), height * 0.05) 
+ rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
 }

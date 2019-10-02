@@ -32,7 +32,7 @@ let maleCharacterSprite;
 let femaleCharacterSprite;
 
 //dialog
-let IntroDialog = ["Welcome to the monde de Pokebro!!! Press spacebar to continue.", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "placeholder", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
+let introDialog = ["Welcome to the monde de Pokebro!!! Press spacebar to continue.", "I am Songru Tom, the world's leading researcher in the field of flexology.", "Oh, I'm sorry but what was your name again???", "placeholder", "Wait... are you a boy or a girl???", "Oh right, my bad, anyways, your journey to becoming the greatest flexer of the century begins now!"];
 
 //buttons
 let aPressed = false;
@@ -40,7 +40,7 @@ let bPressed = false;
 let inputButton;
 
 function preload() {
-  IntroBg = loadImage("assets/introbackground.PNG");
+  introBg = loadImage("assets/introbackground.PNG");
   prof = [loadImage("assets/professor1.png"), loadImage("assets/professor1.png"), loadImage("assets/professor2.png"), loadImage("assets/professor1.png"), loadImage("assets/professor3.png"), loadImage("assets/professor4.png")]; //professor sprite from https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
   introMusic = loadSound("assets/introMusic.mp3"); //music from youtube (https://www.youtube.com/watch?v=1RRGInmOhTQ)
   maleCharacterSprite = loadImage("assets/maleTestSprite.png");
@@ -87,7 +87,7 @@ function gameIntro() {
     textBox("Ah, yes, hello " + playerName + "!");
   }
   else {
-    textBox(IntroDialog[introTextNum]);
+    textBox(introDialog[introTextNum]);
   }
 
   //advances game when space bar is pressed

@@ -5,12 +5,14 @@ body, html {
     width: 100%;
     overflow: hidden;
 }
+
 canvas {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }

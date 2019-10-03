@@ -5,35 +5,35 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let playerSprite;
-
-class attacks {
-  constructor(attackName, damage, accuracy, flexPotential) {
-    
-  }
-}
-
-class characters {
-  constructor(theName, theSprite, otherSprite, attack1, attack2, x, y) {
+class Dudes {
+  constructor(theName, sprite1, sprite2, sprite3, sprite4, x, y) {
     this.name = theName;
 
-    this.sprite = theSprite;
-    this.vsSprite = otherSprite;
-
-    this.attaccs = [attack1, attack2] 
+    this.sprite = [sprite1, sprite2, sprite3, sprite4];
 
     this.x = x;
     this.y = y;
   }
 
-  display(x, y) {
-    Image(playerSprite, x, y, 100, 100);
+  display() {
+    Image(this.sprite[currentDirections], this.x, this.y, 100, 100);
   }
 
-  attack
+  move() {
+    
+  }
 }
 
-let mainPlayer = new characters("Bro", playerSprite, width/2, height/2);
+let mainPlayer = new characters("Bro",  width/2, height/2);
+
+let Directions = {
+  down: 0,
+  up: 1,
+  right: 2,
+  left: 3
+} 
+
+let currentDirections = Directions.down;
 
 function preload() {
   playerSprite = loadImage("assets/")
@@ -46,4 +46,19 @@ function setup() {
 
 function draw() {
  rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
+}
+
+function keyPressed() {
+  if (keyCode === DOWN_ARROW) {
+    currentDirections = Directions.down;
+  } 
+  else if (keyCode === UP_ARROW) {
+    currentDirections = Directions.up;
+  }
+  else if (keyCode === RIGHT_ARROW) {
+    currentDirections = Directions.right;
+  }
+  else if (keyCode === DOWN_ARROW) {
+    currentDirections = Directions.left;
+  }
 }

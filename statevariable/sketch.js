@@ -20,20 +20,22 @@ class Dudes {
   }
 
   move() {
-    
+    if () {
+
+    }
   }
-}
+} 
 
-let mainPlayer = new characters("Bro",  width/2, height/2);
+let mainPlayer = new Dudes("Bro",  , width/2, height/2);
 
-let Directions = {
+let directions = {
   down: 0,
   up: 1,
   right: 2,
   left: 3
-} 
+} ;
 
-let currentDirections = Directions.down;
+let currentDirections = directions.down;
 
 function preload() {
   playerSprite = loadImage("assets/")
@@ -50,15 +52,15 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {
-    currentDirections = Directions.down;
+    currentDirections = directions.down;
   } 
   else if (keyCode === UP_ARROW) {
-    currentDirections = Directions.up;
+    currentDirections = directions.up;
   }
   else if (keyCode === RIGHT_ARROW) {
-    currentDirections = Directions.right;
+    currentDirections = directions.right;
   }
   else if (keyCode === DOWN_ARROW) {
-    currentDirections = Directions.left;
+    currentDirections = directions.left;
   }
 }

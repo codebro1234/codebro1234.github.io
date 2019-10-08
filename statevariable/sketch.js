@@ -10,6 +10,11 @@ let backgroundImage;
 
 let mainPlayer;
 
+let frontSprite;
+let backSprite;
+let rightSprite;
+let leftSprite;
+
 let directions = {
   down: 0,
   up: 1,
@@ -20,7 +25,10 @@ let directions = {
 let currentDirections = directions.down;
 
 function preload() {
-  playerSprite = loadImage("assets/")
+  frontSprite = loadImage("assets/frontSprite.png");
+  backSprite = loadImage("assets/backSprite.png");
+  rightSprite = loadImage("assets/rightSprite.png");
+  leftSprite = loadImage("assets/leftSprite.png");
   backgroundImage = loadImage("assets/")
 }
 
@@ -36,23 +44,22 @@ function draw() {
     walkAround();
   }
 
- //rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
 }
 
 class Dudes {
   constructor(theName, sprite1, sprite2, sprite3, sprite4, x, y) {
     this.name = theName;
-
+    
     this.sprite = [sprite1, sprite2, sprite3, sprite4];
 
     this.x = x;
     this.y = y;
   }
-
+  
   display() {
     Image(this.sprite[currentDirections], this.x, this.y, 100, 100);
   }
-
+  
   move() {
     if () {
       
@@ -62,8 +69,9 @@ class Dudes {
 
 function walkAround() {
   background(backgroundImage);
-
   
+  
+  //rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
 }
 
 function keyPressed() {

@@ -75,7 +75,9 @@ class Dudes {
 function walkAround() {
   background(backgroundImage);
   
+  stroke(0);
   rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
+  stroke(0, )
   rect(3 * (width/4) + (((width/4) * 0.9) * 0.1), height * 0.05, (width/4) * 0.9, (height * 0.9)/4); 
   rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
   rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 

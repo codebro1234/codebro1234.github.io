@@ -27,24 +27,18 @@ let directions = {
 let currentDirections = directions.down;
 
 function preload() {
-  mainCharacterSprites = [loadImage("assets/backSprite.png"), loadImage("assets/frontSprite.png"), loadImage("assets/rightSprite.png"), loadImage("assets/leftSprite.png")]; 
-  backgroundImage = loadImage("assets/")
+  mainCharacterSprites = [loadImage("assets/frontSprite.png"), loadImage("assets/backSprite.png"), loadImage("assets/rightSprite.png"), loadImage("assets/leftSprite.png")]; 
 }
 
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
-  background(backgroundImage);
   
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
 }
 
 function draw() {
-  if (mode === 0) {
-    walkAround();
-  }
-  else if (mode === 1) {
-    background(0);
-  }
+  walkAround();
+  console.log(currentDirections);
 }
 
 class Dudes {
@@ -58,7 +52,7 @@ class Dudes {
   }
   
   display() {
-    image(this.sprite[currentDirections], this.x, this.y, 100, 100);
+    image(this.sprite[currentDirections], this.x, this.y, 30, 30);
   }
   
   // move() {
@@ -78,19 +72,21 @@ class Dudes {
 } 
 
 function walkAround() {
-  mainPlayer.display();
-  mainPlayer.move();
+  background(220);
 
-  if (keyPressed) {
+  mainPlayer.display();
+  //mainPlayer.move();
+
+  if (keyIsPressed) {
     if (key === " ") {
-      mode++;
+      displayMenu();
     }
   }
 }
 
-function displayMenu () {
-  stroke(0);
+function displayMenu() {
   rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
+
   for (let i = height * 0.05; i > (height * 0.05) + height * 0.9; i += (height * 0.9)/4) {
     rect(3 * (width/4) + (((width/4) * 0.9) * 0.1), i, (width/4) * 0.9, (height * 0.9)/4);
   }   

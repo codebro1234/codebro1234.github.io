@@ -32,6 +32,7 @@ function preload() {
 
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
+  imageMode(CENTER);
   
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
 }
@@ -74,22 +75,24 @@ class Dudes {
 function walkAround() {
   background(220);
 
-  mainPlayer.display();
-  //mainPlayer.move();
-
-  if (keyIsPressed) {
-    if (key === " ") {
+  switch(mode) {
+    case 0:
+      mainPlayer.display();
+      //mainPlayer.move();
+      break;
+    case 1:
       displayMenu();
-    }
+      break;
   }
 }
 
 function displayMenu() {
-  rect(3 * (width/4), height * 0.05, (width/4) * 0.9, height * 0.9); 
+  let menuHeight = height * 0.9;
+  let menuWidth = (width/4) * 0.9;
+  let menuXPos = 3 * (width/4);
+  let menuYpos = height * 0.05;
 
-  for (let i = height * 0.05; i > (height * 0.05) + height * 0.9; i += (height * 0.9)/4) {
-    rect(3 * (width/4) + (((width/4) * 0.9) * 0.1), i, (width/4) * 0.9, (height * 0.9)/4);
-  }   
+  rect(menuXPos, menuYpos, menuWidth, menuHeight);  
 }
 
 function keyPressed() {
@@ -105,7 +108,7 @@ function keyPressed() {
     currentDirections = directions.right;
     movingRight = true;
   }
-  else if (keyCode === DOWN_ARROW) {
+  else if (keyCode === LEFT_ARROW) {
     currentDirections = directions.left;
     movingLeft = true;
   }

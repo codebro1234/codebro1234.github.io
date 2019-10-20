@@ -8,6 +8,8 @@
 let mode = 0;
 let backgroundImage;
 
+let unit;
+
 let mainPlayer;
 
 let mainCharacterSprites;
@@ -33,13 +35,20 @@ function preload() {
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
-  
+
+  unit = width/60;  
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
 }
 
 function draw() {
-  walkAround();
-  console.log(currentDirections);
+  background(220);
+
+  if (menuOn) {  // no change this stuff man
+    displayMenu();
+  }
+  else {
+    walkAround();
+  }
 }
 
 class Dudes {
@@ -53,37 +62,40 @@ class Dudes {
   }
   
   display() {
-    image(this.sprite[currentDirections], this.x, this.y, 30, 30);
+    image(this.sprite[currentDirections], this.x, this.y, unit * 2, unit * 2);
   }
   
-  // move() {
-  //   if (movingDown) {
-      
-  //   }
-  //   else if (movingUp) {
-
-  //   }
-  //   else if (movingRight) {
-      
-  //   }
-  //   else if (movingLeft) {
-      
-  //   }    
-  // }
+  move() {
+    if (movingDown) {
+      if (currentDirections === directions.down) {
+        this.y += unit;
+        movingDown = false;
+      }
+    }
+    else if (movingUp) {
+      if (currentDirections === directions.up) {
+        this.y -= unit;
+        movingUp = false;
+      }
+    }
+    else if (movingRight) {
+      if (currentDirections === directions.right) {
+        this.x += unit;
+        movingRight = false;
+      }
+    }
+    else if (movingLeft) {
+      if (currentDirections === directions.left) {
+        this.x -= unit;
+        movingLeft = false;
+      }
+    }    
+  }
 } 
 
 function walkAround() {
-  background(220);
-
-  switch(mode) {
-    case 0:
-      mainPlayer.display();
-      //mainPlayer.move();
-      break;
-    case 1:
-      displayMenu();
-      break;
-  }
+  mainPlayer.display();
+  mainPlayer.move();
 }
 
 function displayMenu() {
@@ -114,17 +126,17 @@ function keyPressed() {
   }
 }
 
-function keyReleased() {
-  if (keyCode === DOWN_ARROW) {
-    movingDown = false;
-  } 
-  else if (keyCode === UP_ARROW) {
-    movingUp = false;
-  }
-  else if (keyCode === RIGHT_ARROW) {
-    movingRight = false;
-  }
-  else if (keyCode === DOWN_ARROW) {
-    movingLeft = false;
-  }
-}
+// function keyReleased() {
+//   if (keyCode === DOWN_ARROW) {
+//     movingDown = false;
+//   } 
+//   else if (keyCode === UP_ARROW) {
+//     movingUp = false;
+//   }
+//   else if (keyCode === RIGHT_ARROW) {
+//     movingRight = false;
+//   }
+//   else if (keyCode === DOWN_ARROW) {
+//     movingLeft = false;
+//   }
+// }

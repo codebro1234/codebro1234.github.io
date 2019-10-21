@@ -79,13 +79,23 @@ function setup() {
 }
 
 function draw() {
-  background(190);
-
   if (mode === 0) {  
     walkAround();
   }
   else if (mode === 1) {
     displayMenu();
+  }
+  else if (mode === 2) {
+    displayPokebros();
+  }
+  else if (mode === 3) {
+    displayBag();
+  }
+  else if (mode === 4) {
+    displayCard();
+  }
+  else if (mode === 5) {
+    mode = 0;
   }
 
   if (mode < 0) {
@@ -155,22 +165,22 @@ class MenuOptions {
     text(this.title, this.x, this.y, this.width, this.height);
     image(this.icon, this.x - 30, this.y + 5, 30, 30);
   }
-  
-  // select() {
-  //   theFunction();
-  // }
 }
 
 function walkAround() {
+  background(190);
+
   mainPlayer.display();
   mainPlayer.move();
 }
 
 function displayMenu() {
+  background(190);
+
   stroke(210);
   rect(menuXPos, menuYPos, menuWidth, menuHeight, 10);
+  stroke(0, 200, 255); //undo filter dawg
   strokeWeight(5);
-  stroke(0, 200, 255);
   rect(menuXPos + 2, menuYPos + 2, menuWidth - 4, menuHeight - 4, 10);
   
   for (let i = 0; i < menuOptions.length; i++) {
@@ -187,44 +197,80 @@ function displayMenu() {
   menuOptions[cursor].highlight();
 }
 
-// function displayPokebros() {
-//   for 
-// }
+function displayPokebros() {
+  background(0, 190, 255);
+
+  for (let x = width * 0.07; x < width * 0.7; x += ((width/2) * 0.9)) {
+    for (let y = height * 0.075; y < height * 0.8; y += ((height/3) * 0.9)) {
+      rect(x, y, (width/2) * 0.85, (height/3) * 0.75, 10);
+    }
+  } 
+}
+
+function displayBag() {
+  console.log("bag stuff");
+}
+
+function displayCard() {
+  console.log("card stuff");
+}
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {
-    if (currentDirections === directions.down) {
-      movingDown = true;
+    if (mode === 0) {
+      if (currentDirections === directions.down) {
+        movingDown = true;
+      }
+      currentDirections = directions.down;
     }
-    currentDirections = directions.down;
-    cursor++;
+    else {
+      cursor++;
+    }
   } 
   else if (keyCode === UP_ARROW) {
-    if (currentDirections === directions.up) {
-      movingUp = true;
+    if (mode === 0) {
+      if (currentDirections === directions.up) {
+        movingUp = true;
+      }
+      currentDirections = directions.up;
     }
-    currentDirections = directions.up;
-    cursor--;
+    else {
+      cursor--;
+    }
   }
   else if (keyCode === RIGHT_ARROW) {
-    if (currentDirections === directions.right) {
-      movingRight = true;
+    if (mode === 0) {
+      if (currentDirections === directions.right) {
+        movingRight = true;
+      }
+      currentDirections = directions.right;
     }
-    currentDirections = directions.right;
   }
   else if (keyCode === LEFT_ARROW) {
-    if (currentDirections === directions.left) {
-      movingLeft = true;
+    if (mode === 0) {
+      if (currentDirections === directions.left) {
+        movingLeft = true;
+      }
+      currentDirections = directions.left;
     }
-    currentDirections = directions.left;
   }
 }
 
 function keyTyped() {
   if (key === " ") {
-    mode++;
+    if (mode === 0) {
+      mode++;
+    }
+    else if (mode === 1) {
+      mode = cursor + 2;
+    }
   }
   else if (key === "b") {
-    mode--;
+    if (mode > 1) {
+      mode = 1;
+    }
+    else {
+      mode = 0;
+    }
   }
 }

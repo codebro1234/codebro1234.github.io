@@ -10,9 +10,15 @@ canvas {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+h1 {
+    margin-bottom: 0%;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
 }

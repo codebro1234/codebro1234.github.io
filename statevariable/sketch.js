@@ -14,6 +14,9 @@ let mainPlayer;
 
 let mainCharacterSprites;
 
+let obamaPic;
+let trumpPic;
+
 let movingUp = false;
 let movingDown = false;
 let movingRight = false;
@@ -54,6 +57,8 @@ function preload() {
   bagIcon = loadImage("assets/bag.png");
   cardIcon = loadImage("assets/card.png");
   exitIcon = loadImage("assets/exit.png");
+  obamaPic = loadImage("assets/obama.png");
+  trumpPic = loadImage("assets/trump.PNG");
 }
 
 function setup() {
@@ -153,15 +158,16 @@ class MenuOptions {
     textSize(20);
     noStroke();
     text(this.title, this.x, this.y, this.width, this.height);
-    filter(GRAY);
     image(this.icon, this.x - 30, this.y + 5, 30, 30);
   }
 
   highlight() {
     stroke(255, 0, 0);
+    fill(255);
     rect(this.x - 60, this.y - 20, this.width * 0.9, this.height/2, 10);
     textSize(20);
     noStroke();
+    fill(0);
     text(this.title, this.x, this.y, this.width, this.height);
     image(this.icon, this.x - 30, this.y + 5, 30, 30);
   }
@@ -179,10 +185,12 @@ function displayMenu() {
 
   stroke(210);
   rect(menuXPos, menuYPos, menuWidth, menuHeight, 10);
-  stroke(0, 200, 255); //undo filter dawg
+  stroke(0, 200, 255); 
   strokeWeight(5);
+  fill(255);
   rect(menuXPos + 2, menuYPos + 2, menuWidth - 4, menuHeight - 4, 10);
   
+  fill(0);
   for (let i = 0; i < menuOptions.length; i++) {
     menuOptions[i].display();
   }
@@ -198,21 +206,73 @@ function displayMenu() {
 }
 
 function displayPokebros() {
-  background(0, 190, 255);
+  background(147, 176, 204);
 
   for (let x = width * 0.07; x < width * 0.7; x += ((width/2) * 0.9)) {
     for (let y = height * 0.075; y < height * 0.8; y += ((height/3) * 0.9)) {
+      fill(70, 108, 145);
       rect(x, y, (width/2) * 0.85, (height/3) * 0.75, 10);
     }
-  } 
+  }
+  showStats();
+}
+
+function showStats() {
+  image(obamaPic, width * 0.15, height * 0.2, 100, 100);
+  textSize(30);
+  fill(0);
+  text("Brobama", width * 0.225, height * 0.15, 100, 30);
+  textSize(10);
+  text("HP", width * 0.225, height * 0.225, 30, 30);
+  fill(100);
+  rect(width * 0.25, height * 0.225, 150, 10);
+  fill(255, 0, 0);
+  rect(width * 0.25, height * 0.225, 150 * 0.16, 10);
+  fill(0);
+  textSize(15)
+  text("69/420", width * 0.3, height * 0.255, 50, 40);
 }
 
 function displayBag() {
-  console.log("bag stuff");
+  background(147, 176, 204);
+
+  image(bagIcon, width/4, height/3, width/3, height/2);
+  fill(92, 247, 165);
+  rect(width * 0.45, height/12, width/2, height * 0.6, 10);
+  fill(255);
+  rect(width * 0.465, height * 0.1, width * 0.47, height * 0.565, 10);
+
+  textBox("Your bag is empty.");
 }
 
 function displayCard() {
-  console.log("card stuff");
+  background(147, 176, 204);
+
+  fill(210);
+  rect(width * 0.05, height * 0.05, width * 0.9, height * 0.9, 10);
+  fill(255, 125, 162);
+  rect(width * 0.06, height * 0.06, width * 0.88, height * 0.88, 10);
+
+  fill(0);
+  textSize(50);
+  text("Trainer Card", width * 0.15, height * 0.2, width * 0.6, height * 0.2);
+
+  textSize(20);
+  text("Name: " + mainPlayer.name, width * 0.2, height * 0.4, width * 0.6, height * 0.2);
+  text("Money: $0", width * 0.2, height * 0.5, width * 0.6, height * 0.2); // either a variable or element in the Dudes class will be added
+  text("Time Played: " + String(round(millis()/1000, 2)) + " s", width * 0.2, height * 0.6, height * 0.6, height * 0.2);
+  text("Pokemons: 0", width * 0.2, height * 0.7, width * 0.6, height * 0.2); // will array will be added as an element in Dudes class for the pokemons
+
+  image(trumpPic, width * 0.66, height * 0.55, 175, 300);
+}
+
+function textBox(theText) {
+  fill(255);
+  rect(width * 0.01, 3 * (height/4) - height * 0.01, width - width * 0.02, height/4, 20);
+  
+  fill(0);
+  textSize(20);
+  text(theText, width * 0.05, 3 * (height/4) + height * 0.03, width - width * 0.05, height/4)
 }
 
 function keyPressed() {

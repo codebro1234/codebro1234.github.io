@@ -95,10 +95,6 @@ function setup() {
 
 //checks state to display proper page
 function draw() {
-  if (millis() < 3000) {
-    textBox("Press space for 'select', b for 'back', use arrow keys to move around");
-  }
-
   if (mode === 0) {  
     walkAround();
   }

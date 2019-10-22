@@ -59,6 +59,8 @@ let directions = {
 
 let currentDirections = directions.down;
 
+let beginningGame = true;
+
 function preload() {
   mainCharacterSprites = [loadImage("assets/frontSprite.png"), loadImage("assets/backSprite.png"), loadImage("assets/rightSprite.png"), loadImage("assets/leftSprite.png")]; 
   pokeballIcon = loadImage("assets/pokeball.png");
@@ -71,6 +73,7 @@ function preload() {
 
 function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
+  background(190);
   imageMode(CENTER);
 
   unit = width/60;
@@ -95,27 +98,32 @@ function setup() {
 
 //checks state to display proper page
 function draw() {
-  if (mode === 0) {  
-    walkAround();
+  if (beginningGame) {
+    textBox("Spacebar is 'select'/'continue' button and opens up menu, b key is 'back' button, use arrowkeys to move around.");
   }
-  else if (mode === 1) {
-    displayMenu();
-  }
-  else if (mode === 2) {
-    displayPokebros();
-  }
-  else if (mode === 3) {
-    displayBag();
-  }
-  else if (mode === 4) {
-    displayCard();
-  }
-  else if (mode === 5) {
-    mode = 0; //exit button on menu
-  }
+  else {
+    if (mode === 0) {  
+      walkAround();
+    }
+    else if (mode === 1) {
+      displayMenu();
+    }
+    else if (mode === 2) {
+      displayPokebros();
+    }
+    else if (mode === 3) {
+      displayBag();
+    }
+    else if (mode === 4) {
+      displayCard();
+    }
+    else if (mode === 5) {
+      mode = 0; //exit button on menu
+    }
 
-  if (mode < 0) {
-    mode = 0; //preventing
+    if (mode < 0) {
+      mode = 0; //preventing mode from decreasing below the first state
+    }
   }
 }
 
@@ -352,11 +360,16 @@ function keyPressed() {
 function keyTyped() {
   //spacebar acts as "select" button
   if (key === " ") {
-    if (mode === 0) {
-      mode++;
+    if (beginningGame) {
+      beginningGame = false;
     }
-    else if (mode === 1) {
-      mode = cursor + 2;
+    else {
+      if (mode === 0) {
+        mode++;
+      }
+      else if (mode === 1) {
+        mode = cursor + 2;
+      }
     }
   }
   //b acts as a "back" button

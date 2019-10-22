@@ -1,14 +1,19 @@
 // State Variable
 // Abrar Zaher
-// Date
+// 21/10/19
+//
+// State variables were used to signify different states of the menu selection which will be used in the final pr0ject
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Took objects further and used classes
+// - Used multiple arrays to increase efficiency
+// - Played with the HTML and CSS to format the screen
 
-let mode = 0;
+let mode = 0; //different modes for different stages of the menu
+
 let backgroundImage;
 
-let unit;
+let unit; // one "block", which is how the ground will be sized (saving that for grids assignment)
 
 let mainPlayer;
 
@@ -17,6 +22,7 @@ let mainCharacterSprites;
 let obamaPic;
 let trumpPic;
 
+// booleans used to move the character around
 let movingUp = false;
 let movingDown = false;
 let movingRight = false;
@@ -36,12 +42,14 @@ let menuOptions;
 
 let cursor = 0;
 
+// dimensions of the menu
 let menuHeight;
 let menuWidth;
 let menuXPos;
 let menuYPos;
 let selectionYPos;
 
+// direction enumeration
 let directions = {
   down: 0,
   up: 1,
@@ -67,12 +75,14 @@ function setup() {
 
   unit = width/60;
 
+  // defining here as the height and width were required
   menuHeight = height * 0.9;
   menuWidth = (width/4);
   menuXPos = (3 * (width/4)) - 30;
   menuYPos = height * 0.05;
   selectionYPos = menuYPos + 60;  
 
+  // defining the the variables for the classes
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
   
   checkPokebros = new MenuOptions("Pokebros", pokeballIcon, menuXPos + 70, selectionYPos, menuWidth, menuHeight/4);
@@ -84,6 +94,8 @@ function setup() {
 }
 
 function draw() {
+  //checks state to display proper page
+
   if (mode === 0) {  
     walkAround();
   }
@@ -100,11 +112,11 @@ function draw() {
     displayCard();
   }
   else if (mode === 5) {
-    mode = 0;
+    mode = 0; //exit button on menu
   }
 
   if (mode < 0) {
-    mode = 0;
+    mode = 0; //preventing
   }
 }
 

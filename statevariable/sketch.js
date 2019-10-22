@@ -13,7 +13,7 @@ let mode = 0; //different modes for different stages of the menu
 
 let backgroundImage;
 
-let unit; // one "block", which is how the ground will be sized (saving that for grids assignment)
+let unit; //one "block", which is how the ground will be sized (saving that for grids assignment)
 
 let mainPlayer;
 
@@ -22,7 +22,7 @@ let mainCharacterSprites;
 let obamaPic;
 let trumpPic;
 
-// booleans used to move the character around
+//booleans used to move the character around
 let movingUp = false;
 let movingDown = false;
 let movingRight = false;
@@ -42,14 +42,14 @@ let menuOptions;
 
 let cursor = 0;
 
-// dimensions of the menu
+//dimensions of the menu
 let menuHeight;
 let menuWidth;
 let menuXPos;
 let menuYPos;
 let selectionYPos;
 
-// direction enumeration
+//direction enumeration
 let directions = {
   down: 0,
   up: 1,
@@ -75,14 +75,14 @@ function setup() {
 
   unit = width/60;
 
-  // defining here as the height and width were required
+  //defining here as the height and width were required
   menuHeight = height * 0.9;
   menuWidth = (width/4);
   menuXPos = (3 * (width/4)) - 30;
   menuYPos = height * 0.05;
   selectionYPos = menuYPos + 60;  
 
-  // defining the the variables for the classes
+  //defining the the variables for the classes
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
   
   checkPokebros = new MenuOptions("Pokebros", pokeballIcon, menuXPos + 70, selectionYPos, menuWidth, menuHeight/4);
@@ -93,8 +93,11 @@ function setup() {
   menuOptions = [checkPokebros, checkBag, checkPlayerCard, exit];
 }
 
+//checks state to display proper page
 function draw() {
-  //checks state to display proper page
+  if (millis() < 3000) {
+    textBox("Press space for 'select', b for 'back', use arrow keys to move around");
+  }
 
   if (mode === 0) {  
     walkAround();
@@ -120,6 +123,7 @@ function draw() {
   }
 }
 
+//this class will be used later on along with more parameters for the players and npc's
 class Dudes {
   constructor(theName, spriteArray, x, y) {
     this.name = theName;
@@ -130,10 +134,12 @@ class Dudes {
     this.y = y;
   }
   
+  //display specifc sprite based off direction
   display() {
     image(this.sprite[currentDirections], this.x, this.y, unit * 2, unit * 2);
   }
   
+  //bool assigned as false following as the framerate is much quicker than humans
   move() {
     if (movingDown) {
       this.y += unit;
@@ -154,6 +160,7 @@ class Dudes {
   }
 } 
 
+//class for menu options to allow for easier functionality
 class MenuOptions {
   constructor(someTitle, somePicture, xPos, yPos, widthVal, heightVal) {
     this.title = someTitle;
@@ -173,18 +180,15 @@ class MenuOptions {
     image(this.icon, this.x - 30, this.y + 5, 30, 30);
   }
 
+  //higlights the option with red outline
   highlight() {
     stroke(255, 0, 0);
-    fill(255);
+    noFill();
     rect(this.x - 60, this.y - 20, this.width * 0.9, this.height/2, 10);
-    textSize(20);
-    noStroke();
-    fill(0);
-    text(this.title, this.x, this.y, this.width, this.height);
-    image(this.icon, this.x - 30, this.y + 5, 30, 30);
   }
 }
 
+//moves player around
 function walkAround() {
   background(190);
 
@@ -192,9 +196,11 @@ function walkAround() {
   mainPlayer.move();
 }
 
+//pops up menu
 function displayMenu() {
   background(190);
 
+  //drawing out menu shape
   stroke(210);
   rect(menuXPos, menuYPos, menuWidth, menuHeight, 10);
   stroke(0, 200, 255); 
@@ -204,9 +210,10 @@ function displayMenu() {
   
   fill(0);
   for (let i = 0; i < menuOptions.length; i++) {
-    menuOptions[i].display();
+    menuOptions[i].display();  //draws out the menu options
   }
   
+  //cursor limitations
   if (cursor > 3) {
     cursor = 3;
   }
@@ -214,70 +221,89 @@ function displayMenu() {
     cursor = 0;
   }
   
-  menuOptions[cursor].highlight();
+  menuOptions[cursor].highlight();  //highlights based off cursor position
 }
 
+//display the pokemons once the option is selected
 function displayPokebros() {
   background(147, 176, 204);
 
+  fill(70, 108, 145);
+  noStroke();
   for (let x = width * 0.07; x < width * 0.7; x += ((width/2) * 0.9)) {
     for (let y = height * 0.075; y < height * 0.8; y += ((height/3) * 0.9)) {
-      fill(70, 108, 145);
-      rect(x, y, (width/2) * 0.85, (height/3) * 0.75, 10);
+      rect(x, y, (width/2) * 0.85, (height/3) * 0.75, 10);  //drawing out the rectangles in which the pokemons will be displayed
     }
   }
-  showStats();
+  showPokebros();
 }
 
-function showStats() {
+//shows pokemon stats, eventually a class will be created for the pokemons which will make this simpler
+function showPokebros() {
+  noStroke();
+
+  //displays pokemon sprite
   image(obamaPic, width * 0.15, height * 0.2, 100, 100);
+
+  //displays name
   textSize(30);
   fill(0);
   text("Brobama", width * 0.225, height * 0.15, 100, 30);
+
+  //displays health
   textSize(10);
   text("HP", width * 0.225, height * 0.225, 30, 30);
   fill(100);
   rect(width * 0.25, height * 0.225, 150, 10);
   fill(255, 0, 0);
-  rect(width * 0.25, height * 0.225, 150 * 0.16, 10);
+  rect(width * 0.25, height * 0.225, 150 * 0.16, 10);  //this length will be based off the current health once made
   fill(0);
   textSize(15)
-  text("69/420", width * 0.3, height * 0.255, 50, 40);
+  text("69/420", width * 0.3, height * 0.255, 50, 40);  //this will simply be variables once pokemon classes are made
 }
 
+//displays items in the bag once selected from menu
 function displayBag() {
   background(147, 176, 204);
+  noStroke();
 
   image(bagIcon, width/4, height/3, width/3, height/2);
   fill(92, 247, 165);
   rect(width * 0.45, height/12, width/2, height * 0.6, 10);
   fill(255);
-  rect(width * 0.465, height * 0.1, width * 0.47, height * 0.565, 10);
+  rect(width * 0.465, height * 0.1, width * 0.47, height * 0.565, 10); //player class will have an array of items which will be displayed here
 
-  textBox("Your bag is empty.");
+  textBox("Your bag is empty.");  //this textbox will give brief info on the item
 }
 
+//displays player info once selected from menu
 function displayCard() {
   background(147, 176, 204);
+  noStroke();
 
+  //creates a big "card" in which information will be displayed
   fill(210);
   rect(width * 0.05, height * 0.05, width * 0.9, height * 0.9, 10);
   fill(255, 125, 162);
   rect(width * 0.06, height * 0.06, width * 0.88, height * 0.88, 10);
 
+  //"Trainer Card" title
   fill(0);
   textSize(50);
   text("Trainer Card", width * 0.15, height * 0.2, width * 0.6, height * 0.2);
 
+  //displays info
   textSize(20);
   text("Name: " + mainPlayer.name, width * 0.2, height * 0.4, width * 0.6, height * 0.2);
   text("Money: $0", width * 0.2, height * 0.5, width * 0.6, height * 0.2); // either a variable or element in the Dudes class will be added
   text("Time Played: " + String(round(millis()/1000, 2)) + " s", width * 0.2, height * 0.6, height * 0.6, height * 0.2);
   text("Pokemons: 0", width * 0.2, height * 0.7, width * 0.6, height * 0.2); // will array will be added as an element in Dudes class for the pokemons
 
+  //displays player icon
   image(trumpPic, width * 0.66, height * 0.55, 175, 300);
 }
 
+//a function to display text at the bottom of the screen like a pokemon game
 function textBox(theText) {
   fill(255);
   rect(width * 0.01, 3 * (height/4) - height * 0.01, width - width * 0.02, height/4, 20);
@@ -289,13 +315,16 @@ function textBox(theText) {
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {
+    //this if statement ensures the player does not move while menu is on, same for the other buttons
     if (mode === 0) {
+      //this if statement allows player to change directions without moving, same for other buttons
       if (currentDirections === directions.down) {
         movingDown = true;
       }
       currentDirections = directions.down;
     }
     else {
+      //ensures that the cursor only moves when it is actually needed, same for other buttons
       cursor++;
     }
   } 
@@ -311,24 +340,21 @@ function keyPressed() {
     }
   }
   else if (keyCode === RIGHT_ARROW) {
-    if (mode === 0) {
-      if (currentDirections === directions.right) {
-        movingRight = true;
-      }
-      currentDirections = directions.right;
+    if (currentDirections === directions.right) {
+      movingRight = true;
     }
+    currentDirections = directions.right;
   }
   else if (keyCode === LEFT_ARROW) {
-    if (mode === 0) {
-      if (currentDirections === directions.left) {
-        movingLeft = true;
-      }
-      currentDirections = directions.left;
+    if (currentDirections === directions.left) {
+      movingLeft = true;
     }
+    currentDirections = directions.left;
   }
 }
 
 function keyTyped() {
+  //spacebar acts as "select" button
   if (key === " ") {
     if (mode === 0) {
       mode++;
@@ -337,6 +363,7 @@ function keyTyped() {
       mode = cursor + 2;
     }
   }
+  //b acts as a "back" button
   else if (key === "b") {
     if (mode > 1) {
       mode = 1;

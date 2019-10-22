@@ -99,7 +99,7 @@ function setup() {
 //checks state to display proper page
 function draw() {
   if (beginningGame) {
-    textBox("Spacebar is 'select'/'continue' button and opens up menu, b key is 'back' button, use arrowkeys to move around.");
+    textBox("Spacebar is 'select'/'continue' button and opens up menu, b key is 'back' button, use arrow keys to move around.");
   }
   else {
     if (mode === 0) {  
@@ -361,24 +361,24 @@ function keyTyped() {
   //spacebar acts as "select" button
   if (key === " ") {
     if (beginningGame) {
-      beginningGame = false;
+      beginningGame = false;  //turns off instructions at the beginning of the game
     }
     else {
       if (mode === 0) {
-        mode++;
+        mode++;  //goes from main screen to menu
       }
       else if (mode === 1) {
-        mode = cursor + 2;
+        mode = cursor + 2;  //advances to specific mode based off cursor position on menu
       }
     }
   }
   //b acts as a "back" button
   else if (key === "b") {
     if (mode > 1) {
-      mode = 1;
+      mode = 1;  //returns to main menu regardless of menu selection
     }
     else {
-      mode = 0;
+      mode = 0;  //goes from menu to main screen
     }
   }
 }

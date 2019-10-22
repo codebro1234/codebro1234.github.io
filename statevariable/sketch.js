@@ -13,7 +13,7 @@ let mode = 0; //different modes for different stages of the menu
 
 let backgroundImage;
 
-let unit; //one "block", which is how the ground will be sized (saving that for grids assignment)
+let unit; 
 
 let mainPlayer;
 
@@ -22,7 +22,6 @@ let mainCharacterSprites;
 let obamaPic;
 let trumpPic;
 
-//booleans used to move the character around
 let movingUp = false;
 let movingDown = false;
 let movingRight = false;
@@ -42,7 +41,6 @@ let menuOptions;
 
 let cursor = 0;
 
-//dimensions of the menu
 let menuHeight;
 let menuWidth;
 let menuXPos;
@@ -76,16 +74,16 @@ function setup() {
   background(190);
   imageMode(CENTER);
 
-  unit = width/60;
+  unit = width/60;  //one "block", which is how the map will be sized (saving that for grids assignment)
 
-  //defining here as the height and width were required
+  //defining the menu dimension, done here as the height and width were required
   menuHeight = height * 0.9;
   menuWidth = (width/4);
   menuXPos = (3 * (width/4)) - 30;
   menuYPos = height * 0.05;
   selectionYPos = menuYPos + 60;  
 
-  //defining the the variables for the classes
+  //defining the variables for the classes
   mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
   
   checkPokebros = new MenuOptions("Pokebros", pokeballIcon, menuXPos + 70, selectionYPos, menuWidth, menuHeight/4);
@@ -93,7 +91,7 @@ function setup() {
   checkPlayerCard = new MenuOptions("Player Card", cardIcon, menuXPos + 70, selectionYPos + menuHeight/2, menuWidth, menuHeight/4);
   exit = new MenuOptions("Exit", exitIcon, menuXPos + 70, selectionYPos + 3 * (menuHeight/4), menuWidth, menuHeight/4);
 
-  menuOptions = [checkPokebros, checkBag, checkPlayerCard, exit];
+  menuOptions = [checkPokebros, checkBag, checkPlayerCard, exit]; 
 }
 
 //checks state to display proper page

@@ -49,15 +49,20 @@ function fire() {
     y: cannonY,
     radius: cannonWidth,
     angle: cannonAngle,
-    speed: 15
+    speed: 20
   };
   bullets.push(thisBullet);
 }
 
 function updateBullets() {
-  for (let thisBullet of bullets) {
-    thisBullet.x += thisBullet.speed * cos(thisBullet.angle);
-    thisBullet.y += thisBullet.speed * sin(thisBullet.angle);
-    circle(thisBullet.x, thisBullet.y, thisBullet.radius);
+  for (let i = bullets.length - 1; i > 0; i--) {
+    if (bullets[i].x - bullets[i].radius > width){
+      bullets.splice(i, 1);
+    }
+    else {
+      bullets[i].x += bullets[i].speed * cos(bullets[i].angle);
+      bullets[i].y += bullets[i].speed * sin(bullets[i].angle);
+      circle(bullets[i].x, bullets[i].y, bullets[i].radius);
+    }
   }
 }

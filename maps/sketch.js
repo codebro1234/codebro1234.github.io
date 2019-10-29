@@ -39,15 +39,15 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  groundUnit.width = round(width/50);
-  groundUnit.height = round(height/50);
+  groundUnit.width = round(width/30);
+  groundUnit.height = round(height/30);
 
   cols = round(width/groundUnit.width);
   rows = round(height/groundUnit.height);
 
   grid = create2DArray(cols, rows);
 
-  mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2, height/2);
+  mainPlayer = new Dudes("Bro", mainCharacterSprites, width/2 + groundUnit.width/2, height/2 + 3);
 }
 
 function draw() {
@@ -96,6 +96,7 @@ class Dudes {
 function showGrid(someGrid) {
   for (let i = 0; i < someGrid[0].length; i++) {
     for (let j = 0; j < someGrid[0].length; j++) {
+      fill(someGrid[i][j] * 255);
       rect(i * groundUnit.width, j * groundUnit.height, groundUnit.width, groundUnit.height); 
     }
   }
@@ -103,13 +104,14 @@ function showGrid(someGrid) {
 
 function create2DArray(cols, rows) {
   let someArray = [];
+  let xAxis = 0
   
   for (let i = 0; i < cols; i++) {
     someArray.push([]);
     for (let j = 0; j < rows; j++) {
-      if (random(100) < 50) {
-        someArray[i].push(1);
-      }
+      someArray[i].push(noise(xAxis));
+
+      xAxis += 0.1;
     }
   }
   

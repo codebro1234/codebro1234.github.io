@@ -1,6 +1,6 @@
-// Line Art Demo
-// Abar
-// Date
+// Grid-Based Game
+// Abrar Zaher
+// 
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
@@ -39,8 +39,8 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  groundUnit.width = round(width/30);
-  groundUnit.height = round(height/30);
+  groundUnit.width = round(width/40);
+  groundUnit.height = round(height/40);
 
   cols = round(width/groundUnit.width);
   rows = round(height/groundUnit.height);

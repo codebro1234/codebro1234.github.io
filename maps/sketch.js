@@ -39,8 +39,8 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  groundUnit.width = round(width/40);
-  groundUnit.height = round(height/40);
+  groundUnit.width = round(width/70);
+  groundUnit.height = round(height/70);
 
   cols = round(width/groundUnit.width);
   rows = round(height/groundUnit.height);
@@ -55,8 +55,8 @@ function draw() {
   
   showGrid(grid);
 
-  mainPlayer.display();
-  mainPlayer.move();
+  //mainPlayer.display();
+  //mainPlayer.move();
 }
 
 class Dudes {
@@ -103,20 +103,28 @@ function showGrid(someGrid) {
 }
 
 function create2DArray(cols, rows) {
-  let someArray = [];
+  //let mapArray = createRandomRoute();
+  let newArray = [];
+  
   let xAxis = 0;
   
   for (let i = 0; i < cols; i++) {
-    someArray.push([]);
+    newArray.push([]);
     for (let j = 0; j < rows; j++) {
-      someArray[i].push(noise(xAxis));
+      newArray[i].push(noise(xAxis));
 
-      xAxis += 0.1;
+      xAxis += 0.03;
     }
   }
   
-  return someArray;
+  return newArray;
 }
+
+// function addRandomRoute() {
+//   let someArray = [];
+
+
+// }
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {

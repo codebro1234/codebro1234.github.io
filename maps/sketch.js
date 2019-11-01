@@ -104,7 +104,7 @@ function showGrid(someGrid) {
 
 function create2DArray(cols, rows) {
   let someArray = [];
-  let xAxis = 0
+  let xAxis = 0;
   
   for (let i = 0; i < cols; i++) {
     someArray.push([]);

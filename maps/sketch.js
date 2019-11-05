@@ -39,8 +39,8 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  groundUnit.width = round(width/70);
-  groundUnit.height = round(height/70);
+  groundUnit.width = round(width/100);
+  groundUnit.height = round(height/100);
 
   cols = round(width/groundUnit.width);
   rows = round(height/groundUnit.height);
@@ -96,7 +96,8 @@ class Dudes {
 function showGrid(someGrid) {
   for (let i = 0; i < someGrid[0].length; i++) {
     for (let j = 0; j < someGrid[0].length; j++) {
-      fill(someGrid[i][j] * 255);
+      fill(someGrid[i][j] * 255); 
+
       rect(i * groundUnit.width, j * groundUnit.height, groundUnit.width, groundUnit.height); 
     }
   }
@@ -107,14 +108,16 @@ function create2DArray(cols, rows) {
   let newArray = [];
   
   let xAxis = 0;
+  let yAxis = 0;
   
   for (let i = 0; i < cols; i++) {
     newArray.push([]);
     for (let j = 0; j < rows; j++) {
-      newArray[i].push(noise(xAxis));
+      newArray[i].push(noise(xAxis, yAxis));
 
-      xAxis += 0.03;
+      yAxis += 0.05;
     }
+    xAxis += 0.05;
   }
   
   return newArray;

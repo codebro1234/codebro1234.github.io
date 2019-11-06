@@ -39,11 +39,11 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  groundUnit.width = round(width/100);
-  groundUnit.height = round(height/100);
+  cols = 100;
+  rows = 100;
 
-  cols = round(width/groundUnit.width);
-  rows = round(height/groundUnit.height);
+  groundUnit.width = round(width/cols);
+  groundUnit.height = round(height/rows);
 
   grid = create2DArray(cols, rows);
 
@@ -104,14 +104,12 @@ function showGrid(someGrid) {
 }
 
 function create2DArray(cols, rows) {
-  //let mapArray = createRandomRoute();
   let newArray = [];
-  
   let xAxis = 0;
-  let yAxis = 0;
   
   for (let i = 0; i < cols; i++) {
     newArray.push([]);
+    let yAxis = 0;
     for (let j = 0; j < rows; j++) {
       newArray[i].push(noise(xAxis, yAxis));
 
@@ -119,15 +117,8 @@ function create2DArray(cols, rows) {
     }
     xAxis += 0.05;
   }
-  
   return newArray;
 }
-
-// function addRandomRoute() {
-//   let someArray = [];
-
-
-// }
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {

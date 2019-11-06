@@ -39,8 +39,8 @@ function setup() {
   createCanvas(3 * (windowWidth/5), (3 * (windowWidth/5))/1.6);
   imageMode(CENTER);
 
-  cols = 100;
-  rows = 100;
+  cols = 125;
+  rows = 125;
 
   groundUnit.width = round(width/cols);
   groundUnit.height = round(height/rows);
@@ -104,12 +104,15 @@ function showGrid(someGrid) {
 }
 
 function create2DArray(cols, rows) {
+  noiseSeed(random(100));
+
   let newArray = [];
   let xAxis = 0;
   
   for (let i = 0; i < cols; i++) {
     newArray.push([]);
     let yAxis = 0;
+
     for (let j = 0; j < rows; j++) {
       newArray[i].push(noise(xAxis, yAxis));
 
@@ -144,5 +147,11 @@ function keyPressed() {
       movingLeft = true;
     }
     currentDirections = directions.left;
+  }
+}
+
+function keyTyped() {
+  if (key === ' ') {
+    grid = create2DArray(cols, rows);
   }
 }

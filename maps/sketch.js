@@ -5,12 +5,14 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let grid;
+let grid = [];
 
 let cols;
 let rows;
 
 let mainCharacterSprites;
+
+let terrainSprites = [];
 
 let movingUp = false;
 let movingDown = false;
@@ -97,8 +99,9 @@ function showGrid(someGrid) {
   for (let i = 0; i < someGrid[0].length; i++) {
     for (let j = 0; j < someGrid[0].length; j++) {
       fill(someGrid[i][j] * 255); 
-
+      
       rect(i * groundUnit.width, j * groundUnit.height, groundUnit.width, groundUnit.height); 
+      //createTerrain(i, j);
     }
   }
 }
@@ -121,6 +124,12 @@ function create2DArray(cols, rows) {
     xAxis += 0.05;
   }
   return newArray;
+}
+
+function createTerrain(xIndex, yIndex) {
+
+
+  image(img, x, y, width, height)
 }
 
 function keyPressed() {

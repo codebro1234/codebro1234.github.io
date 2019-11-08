@@ -11,8 +11,7 @@ let cols;
 let rows;
 
 let mainCharacterSprites;
-
-let terrainSprites = [];
+let grassSprite;
 
 let movingUp = false;
 let movingDown = false;
@@ -35,6 +34,7 @@ let currentDirections = directions.down;
 
 function preload() {
   mainCharacterSprites = [loadImage("assets/frontSprite.png"), loadImage("assets/backSprite.png"), loadImage("assets/rightSprite.png"), loadImage("assets/leftSprite.png")]; 
+  grassSprite = loadImage("assets/grass.png");
 }
 
 function setup() {
@@ -44,8 +44,8 @@ function setup() {
   cols = 100;
   rows = 100;
 
-  groundUnit.width = round(width/cols);
-  groundUnit.height = round(height/rows);
+  groundUnit.width = width/cols;
+  groundUnit.height = height/rows;
 
   grid = create2DArray(cols, rows);
 
@@ -126,11 +126,11 @@ function create2DArray(cols, rows) {
   return newArray;
 }
 
-function createTerrain(xIndex, yIndex) {
+// function createTerrain(xIndex, yIndex) {
 
 
-  image(img, x, y, width, height)
-}
+//   image(img, x, y, width, height)
+// }
 
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {

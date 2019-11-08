@@ -101,7 +101,7 @@ function showGrid(someGrid) {
       fill(someGrid[i][j] * 255); 
       
       rect(i * groundUnit.width, j * groundUnit.height, groundUnit.width, groundUnit.height); 
-      //createTerrain(i, j);
+      //createTerrain(i, j, someGrid);
     }
   }
 }
@@ -126,10 +126,8 @@ function create2DArray(cols, rows) {
   return newArray;
 }
 
-// function createTerrain(xIndex, yIndex) {
-
-
-//   image(img, x, y, width, height)
+// function createTerrain(xIndex, yIndex, theArray) {
+//   image(terrainSprites[round(1/theArray[xIndex][yIndex])], x, y, width, height)
 // }
 
 function keyPressed() {

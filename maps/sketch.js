@@ -1,4 +1,4 @@
-// Grid-Based Game
+// Grid-Based Assignment
 // Abrar Zaher
 // 
 // Generates a 2D array with perlin values to generate islands
@@ -51,7 +51,7 @@ function draw() {
 
 function showMap(someGrid) {
   // shows the map based of frame of view rendering only the grid places that are actually shown
-  
+
   for (let i = xStartingPoint, xPos = 0; i < xStartingPoint + floor(cols/zoom); i++, xPos++) {
     for (let j = yStartingPoint, yPos = 0; j < yStartingPoint + floor(rows/zoom); j++, yPos++) {
       if (someGrid[i][j] < 0.25) {

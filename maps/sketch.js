@@ -9,9 +9,9 @@
 
 let grid = [];
 
-let xStartingPoint = 0;
-let yStartingPoint = 0;
-let zoom = 1;
+let xStartingPoint;
+let yStartingPoint;
+let zoom;
 
 let cols;
 let rows;
@@ -25,12 +25,12 @@ function setup() {
   createCanvas(windowWidth, windowHeight); 
   noStroke();
 
-  // xStartingPoint = 0;
-  // yStartingPoint = 0;
-  // zoom = 1;
+  xStartingPoint = 0;
+  yStartingPoint = 0;
+  zoom = 1;
 
-  cols = 300;
-  rows = 300;
+  cols = 200;
+  rows = 200;
 
   groundUnit.width = width/cols;
   groundUnit.height = height/rows;
@@ -48,12 +48,8 @@ function draw() {
 }
 
 function showMap(someGrid) {
-  let xPos = 0;
-
-  for (let i = xStartingPoint; i < xStartingPoint + cols/zoom; i++) {
-    let yPos = 0;
-    
-    for (let j = yStartingPoint; j < yStartingPoint + rows/zoom; j++) {
+  for (let i = xStartingPoint, xPos = 0; i < xStartingPoint + cols/zoom; i++, xPos++) {
+    for (let j = yStartingPoint, yPos = 0; j < yStartingPoint + rows/zoom; j++, yPos++) {
       if (someGrid[i][j] < 0.25) {
         fill(255);
       } else if (someGrid[i][j] < 0.35) {
@@ -61,30 +57,27 @@ function showMap(someGrid) {
       } else if (someGrid[i][j] < 0.5) {
         fill(0, 255, 0);
       } else {
-        fill(0, 170, 255);
+        fill(0, 180, 255);
       }
-
-      rect(xPos * groundUnit.width * zoom, yPos * groundUnit.height * zoom, groundUnit.width * zoom, groundUnit.height * zoom); 
-      yPos++;
+      rect(xPos * groundUnit.width * zoom, yPos * groundUnit.height * zoom, groundUnit.width * zoom + 1, groundUnit.height * zoom + 1); 
     }
-    xPos++;
   }
 }
 
 function showMiniMap(someGrid) {
   let miniMap = {
-    width: windowWidth/6,
-    height: windowHeight/6,
-    cellWidth: (windowWidth/6)/cols,
-    cellHeight: (windowHeight/6)/rows
+    width: windowWidth/8,
+    height: windowHeight/8,
+    cellWidth: (windowWidth/8)/cols,
+    cellHeight: (windowHeight/8)/rows
   };
 
   stroke(255);
   rect(0, 0, miniMap.width, miniMap.height);
   noStroke();
 
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
+  for (let i = 0; i < cols; i += 4) {
+    for (let j = 0; j < rows; j += 4) {
       if (someGrid[i][j] < 0.25) {
         fill(255);
       } else if (someGrid[i][j] < 0.35) {
@@ -95,7 +88,7 @@ function showMiniMap(someGrid) {
         fill(0, 170, 255);
       }
 
-      rect(i * miniMap.cellWidth, j * miniMap.cellHeight, miniMap.cellWidth, miniMap.cellHeight);
+      rect(i * miniMap.cellWidth, j * miniMap.cellHeight, miniMap.cellWidth * 4 + 0.5, miniMap.cellHeight * 4 + 0.5);
     }
   }
   noFill();

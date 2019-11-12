@@ -6,6 +6,7 @@
 // Extra for Experts:
 // - Added a zoom and move around feature
 // - Added a minimap showing the position on the map
+// - Added foolproofing for the edges
 
 let grid = [];
 
@@ -25,6 +26,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight); 
   noStroke();
 
+  // these values are for the frame of view
   xStartingPoint = 0;
   yStartingPoint = 0;
   zoom = 1;
@@ -48,8 +50,10 @@ function draw() {
 }
 
 function showMap(someGrid) {
-  for (let i = xStartingPoint, xPos = 0; i < xStartingPoint + cols/zoom; i++, xPos++) {
-    for (let j = yStartingPoint, yPos = 0; j < yStartingPoint + rows/zoom; j++, yPos++) {
+  // shows the map based of frame of view rendering only the grid places that are actually shown
+  
+  for (let i = xStartingPoint, xPos = 0; i < xStartingPoint + floor(cols/zoom); i++, xPos++) {
+    for (let j = yStartingPoint, yPos = 0; j < yStartingPoint + floor(rows/zoom); j++, yPos++) {
       if (someGrid[i][j] < 0.25) {
         fill(255);
       } else if (someGrid[i][j] < 0.35) {
@@ -65,6 +69,8 @@ function showMap(someGrid) {
 }
 
 function showMiniMap(someGrid) {
+  //creates a mini map in the corner to show your viewing position
+
   let miniMap = {
     width: windowWidth/8,
     height: windowHeight/8,
@@ -72,11 +78,13 @@ function showMiniMap(someGrid) {
     cellHeight: (windowHeight/8)/rows
   };
 
+  //white border around mini map to seperate from main map
   stroke(255);
   rect(0, 0, miniMap.width, miniMap.height);
   noStroke();
 
-  for (let i = 0; i < cols; i += 4) {
+  //drawing the grid pieces of the mini map, skips by 4 instead of 1 to render less of the grid in order to prevent lag
+  for (let i = 0; i < cols; i += 4) {  
     for (let j = 0; j < rows; j += 4) {
       if (someGrid[i][j] < 0.25) {
         fill(255);
@@ -91,14 +99,19 @@ function showMiniMap(someGrid) {
       rect(i * miniMap.cellWidth, j * miniMap.cellHeight, miniMap.cellWidth * 4 + 0.5, miniMap.cellHeight * 4 + 0.5);
     }
   }
+
+  //drawing a white rectangle outlining the area you are viewing
   noFill();
   stroke(255);
+  strokeWeight(2);
   rect(xStartingPoint * miniMap.cellWidth, yStartingPoint * miniMap.cellHeight, miniMap.width/zoom, miniMap.height/zoom);
   noStroke();
 }
 
 function create2DArray(cols, rows) {
-  noiseSeed(random(100));
+  //creates a 2D array with perlin noise value
+
+  noiseSeed(random(100));  //random noise seed value to have a different map whenever reset
   let newArray = [];
   let xAxis = 0;
 
@@ -115,6 +128,8 @@ function create2DArray(cols, rows) {
 }
 
 function checkForViewingChanges() {
+  //controls for moving the viewing frame around
+
   if (zoom > 1) {
     if (keyIsDown(UP_ARROW)) {
       if (yStartingPoint > 0) {
@@ -141,15 +156,21 @@ function checkForViewingChanges() {
 
 function keyTyped() {
   if (key === ' ') {
-    setup();
+    setup();  //resets viewing frame and generates new map
   }
   else if (key === "w") {
-    zoom += 0.5;
+    zoom += 0.5;  //zoom in
   }
   else if (key === "s") {
+    //zooms out, only if zoomed in the first place
     if (zoom > 1) {
-      xStartingPoint = 0;
-      yStartingPoint = 0;
+      //foolproofing for when zooming out at the edges
+      if (xStartingPoint + floor(cols/(zoom - 0.5)) > grid.length) {
+        xStartingPoint = grid.length - floor(cols/(zoom - 0.5));
+      }
+      if (yStartingPoint + floor(rows/(zoom - 0.5)) > grid.length) {
+        yStartingPoint = grid.length - floor(rows/(zoom - 0.5));
+      }
       zoom -= 0.5;
     }
   }

@@ -66,7 +66,7 @@ function draw() {
 //intro scene for final project
 function gameIntro() {
   //loads background image and professor sprite
-  background(IntroBg);
+  background(introBg);
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8));
   
   //checks for specific states of the intro that have other functions to go through

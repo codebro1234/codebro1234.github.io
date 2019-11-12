@@ -7,9 +7,4 @@ body, html {
 ::-webkit-scrollbar {
     display: none;
 }
-canvas {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-} 
+

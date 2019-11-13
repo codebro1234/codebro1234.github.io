@@ -1,15 +1,84 @@
-// Line Art Demo
-// Abar
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// collision detection
+
+
+let ballArray = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(255);
+
+  ballArray.push(new Ball(width/2, height/2, random(-15, 15), random(-15, 15), 25));
 }
 
 function draw() {
-  line(mouseX, mouseY, pmouseX, pmouseY);
+  background(255);
+
+  for (let i = 0; i < ballArray.length; i++) {
+    ballArray[i].move();
+
+    for (let j = 0; j < ballArray.length; j++) {
+      if (i !== j && ballArray[i].checkForCollision(ballArray[j])) {
+        // ballArray[i].fillColor = color(255, 0, 0);
+        // ballArray[j].fillColor = color(255, 0, 0);
+
+        let firstThingX = ballArray[i].dx;
+        let firstThingY = ballArray[i].dy
+
+        ballArray[i].dx = ballArray[j].dx;
+        ballArray[i].dy = ballArray[j].dy;
+        ballArray[j].dx = firstThingX;
+        ballArray[j].dy = firstThingY;
+      }
+    }
+
+    ballArray[i].display();
+  }
+
+}
+
+class Ball {
+  constructor(x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+    this.fillColor = color(0);
+  }
+
+  move() {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    if (this.x > width - this.radius/2 || this.x < 0 + this.radius/2) {
+      this.dx *= -1;
+    }
+  
+    if (this.y > height - this.radius/2 || this.y < 0 + this.radius/2) {
+      this.dy *= -1;
+    }
+  }
+
+  display() {
+    fill(this.fillColor);
+    circle(this.x, this.y, this.radius * 2);
+  }
+
+  checkForCollision(anotherBall) {
+    let distanceBetweenCenters = dist(this.x, this.y, anotherBall.x, anotherBall.y);
+    let sumOfRadii = this.radius + anotherBall.radius;
+
+    return distanceBetweenCenters < sumOfRadii;
+  }
+}
+
+function windowResized() {
+  setup();
+}
+
+function keyTyped() {
+  if (key === " ") {
+    for (let i = 0; i < 100; i++) {
+      ballArray.push(new Ball(mouseX, mouseY, random(-15, 15), random(-15, 15), 25));
+    }
+  }
 }

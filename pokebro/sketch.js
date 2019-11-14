@@ -40,7 +40,7 @@ let bPressed = false;
 let inputButton;
 
 function preload() {
-  IntroBg = loadImage("assets/introbackground.PNG");
+  introBg = loadImage("assets/introbackground.PNG");
   prof = [loadImage("assets/professor1.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor2.PNG"), loadImage("assets/professor1.PNG"), loadImage("assets/professor3.PNG"), loadImage("assets/professor4.PNG")]; //professor sprite from https://www.spriters-resource.com/game_boy_advance/pokemonfireredleafgreen/
   introMusic = loadSound("assets/introMusic.mp3"); //music from youtube (https://www.youtube.com/watch?v=1RRGInmOhTQ)
   maleCharacterSprite = loadImage("assets/maleTestSprite.png");
@@ -66,7 +66,7 @@ function draw() {
 //intro scene for final project
 function gameIntro() {
   //loads background image and professor sprite
-  background(IntroBg);
+  background(introBg);
   image(prof[introTextNum], width/3, height/6, width/4, 5 * (height/8));
   
   //checks for specific states of the intro that have other functions to go through
